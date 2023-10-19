@@ -1,6 +1,5 @@
 package hiber.dao;
 
-import com.mysql.cj.Query;
 import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
@@ -33,8 +32,7 @@ public class UserDaoImp implements UserDao {
       TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User where empCar.model = :model and empCar.series = :series", User.class);
       query.setParameter("model", car.getModel());
       query.setParameter("series", car.getSeries());
-      List<User> user = query.getResultList();
-      return user;
+      return query.getResultList();
    }
 
 }

@@ -3,6 +3,8 @@ package hiber.service;
 import hiber.dao.UserDao;
 import hiber.model.Car;
 import hiber.model.User;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ public class UserServiceImp implements UserService {
    @Autowired
    private UserDao userDao;
 
+   @Fetch(FetchMode.JOIN)
    @Transactional
    @Override
    public void add(User user) {
@@ -27,7 +30,8 @@ public class UserServiceImp implements UserService {
       return userDao.listUsers();
    }
 
-   @Transactional
+   @Fetch(FetchMode.JOIN)
+   @Transactional(readOnly = true)
    @Override
    public List<User> getUserByCar(Car car) {
       return userDao.getUserByCar(car);

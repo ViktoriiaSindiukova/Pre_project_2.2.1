@@ -1,5 +1,8 @@
 package hiber.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,17 +22,10 @@ public class User {
    @Column(name = "email")
    private String email;
 
+   //@Fetch(FetchMode.JOIN)
    @OneToOne (cascade = CascadeType.ALL)
    @JoinColumn (name = "car_series")
    private Car empCar;
-
-   public void setEmpCar(Car emlCar) {
-      this.empCar = emlCar;
-   }
-
-   public Car getEmpCar() {
-      return empCar;
-   }
 
    public User() {}
    
@@ -38,6 +34,14 @@ public class User {
       this.lastName = lastName;
       this.email = email;
       this.empCar = empCar;
+   }
+
+   public void setEmpCar(Car emlCar) {
+      this.empCar = emlCar;
+   }
+
+   public Car getEmpCar() {
+      return empCar;
    }
 
    public Long getId() {
